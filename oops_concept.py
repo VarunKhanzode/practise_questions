@@ -100,19 +100,29 @@ car.honk()
 #  Concept:
 # Allows different classes to be treated as instances of the same class through a common interface.
 
-class Cat:
-    def speak(self):
-        return "Meow"
+class Shape:
+    def draw(self):
+        raise NotImplementedError("Subclasses should implement this!")
 
-class Dog:
-    def speak(self):
-        return "Woof"
+class Circle:
+    def draw(self):
+        return "Drawing a circle"
 
-def animal_sound(animal):
-    print(animal.speak())
+class Rectangle:
+    def draw(self):
+        return "Drawing a rectangle"
 
-animal_sound(Cat())
-animal_sound(Dog())
+class Triangle:
+    def draw(self):
+        return "Drawing a triangle"
+
+# Generic function that uses polymorphism
+def draw_shape(shape: Shape):
+    print(shape.draw())
+
+draw_shape(Circle())
+draw_shape(Rectangle())
+draw_shape(Triangle())
 # ✅ Use Case:
 # Write generic functions that can work with different object types (like a shape drawer that works on Circle, Rectangle, etc.)
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

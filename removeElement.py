@@ -22,10 +22,15 @@ class Solution:
             print(nums, '\n --------')
         return pointer
     
+sol = Solution()
+
 nums = [0,1,2,2,3,0,4,2]
 val = 2
+sol1 = sol.removeElement(nums, val)
+print(sol1, nums[:sol1])
 
-sol = Solution()
+nums = [3,2,2,3]
+val = 3
 sol1 = sol.removeElement(nums, val)
 print(sol1, nums[:sol1])
 
