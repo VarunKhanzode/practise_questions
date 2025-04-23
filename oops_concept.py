@@ -1,0 +1,288 @@
+
+# A class is a collection of objects. Classes are blueprints for creating objects. 
+# A class defines a set of attributes and methods that the created objects (instances) can have.
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Abstract Class
+# An abstract class is a class that cannot be instantiated directly. 
+# It is meant to be inherited by other classes, and it defines a common interface or contract that all its subclasses must follow.
+# Let’s say you’re building an e-commerce platform. You want to support multiple payment methods: credit card, PayPal, etc.
+
+# Instead of hardcoding the logic, you define an abstract class:
+from abc import ABC, abstractmethod
+class PaymentGateway(ABC):
+    @abstractmethod
+    def authenticate(self):
+        pass
+
+    @abstractmethod
+    def pay(self, amount):
+        pass
+# Then implement it differently for each provider:
+class CreditCardPayment(PaymentGateway):
+    def authenticate(self):
+        print("Authenticating credit card...")
+
+    def pay(self, amount):
+        print(f"Paid {amount} using Credit Card.")
+
+class PayPalPayment(PaymentGateway):
+    def authenticate(self):
+        print("Redirecting to PayPal...")
+
+    def pay(self, amount):
+        print(f"Paid {amount} using PayPal.")
+
+# ✅ Why it's useful:
+# Enforces a common structure across all payment types.
+
+# Makes your code extensible — add CryptoPayment without modifying existing code.
+
+# Works well with polymorphism:
+def process_payment(gateway: PaymentGateway, amount):
+    gateway.authenticate()
+    gateway.pay(amount)
+
+process_payment(CreditCardPayment(), 1000)
+process_payment(PayPalPayment(), 500)
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------
+#  Encapsulation
+#  Concept:
+#  Hiding internal object details and exposing only what’s necessary.
+
+class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance  # private attribute
+
+    def deposit(self, amount):
+        self.__balance += amount
+
+    def get_balance(self):
+        return self.__balance
+
+acc = BankAccount(1000)
+acc.deposit(500)
+print(acc.get_balance())  # 1500
+
+# Use Case:
+# Securing sensitive data like passwords, balance, or tokens from unauthorized access.
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Inheritance
+# Concept:
+# Allows a class to inherit attributes and methods from another class.
+
+class Vehicle:
+    def __init__(self, brand):
+        self.brand = brand
+
+    def start(self):
+        print("Starting vehicle...")
+
+class Car(Vehicle):
+    def __init__(self, brand, model):
+        super().__init__(brand)
+        self.model = model
+
+    def honk(self):
+        print("Beep!")
+
+car = Car("Honda", "Civic")
+car.start()
+car.honk()
+
+# Use Case:
+# Code reuse: build specialized classes from generic ones (e.g., Employee → Manager, Developer).
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Polymorphism
+#  Concept:
+# Allows different classes to be treated as instances of the same class through a common interface.
+
+class Cat:
+    def speak(self):
+        return "Meow"
+
+class Dog:
+    def speak(self):
+        return "Woof"
+
+def animal_sound(animal):
+    print(animal.speak())
+
+animal_sound(Cat())
+animal_sound(Dog())
+# ✅ Use Case:
+# Write generic functions that can work with different object types (like a shape drawer that works on Circle, Rectangle, etc.)
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Method Overriding
+# ➤ Concept:
+# Subclass provides specific implementation of a method already defined in the parent class.
+
+class Parent:
+    def greet(self):
+        print("Hello from Parent")
+
+class Child(Parent):
+    def greet(self):
+        print("Hello from Child")
+
+Child().greet()
+# ✅ Use Case:
+# Specializing behavior in subclasses like customizing API responses in a subclassed view.
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Class vs Instance Attributes
+class Student:
+    school = "ABC School"  # Class attribute
+
+    def __init__(self, name):
+        self.name = name  # Instance attribute
+
+s1 = Student("Alice")
+s2 = Student("Bob")
+
+Student.school = "XYZ School"
+print(s1.school)  # XYZ School
+# ✅ Use Case:
+# Use class attributes for shared values (like DB connection) and instance attributes for object-specific data.
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Static Methods and Class Methods
+# ➤ Static Method:
+# Doesn’t access instance or class data.
+class Utility:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+print(Utility.add(5, 3))
+
+# ➤ Class Method:
+# Accesses class data.
+class Dog:
+    count = 0
+
+    def __init__(self):
+        Dog.count += 1
+
+    @classmethod
+    def total_dogs(cls):
+        return cls.count
+
+Dog()
+Dog()
+print(Dog.total_dogs())  # 2
+# ✅ Use Case:
+# Use static methods for utility functions.
+
+# Use class methods as alternative constructors or to manipulate class state.
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Dunder (Magic) Methods
+# ➤ Concept:
+# Special methods with __ like __init__, __str__, __len__, etc.
+class Book:
+    def __init__(self, title):
+        self.title = title
+
+    def __str__(self):
+        return f"Book: {self.title}"
+
+b = Book("1984")
+print(str(b))
+# ✅ Use Case:
+# Customize object behavior (like adding, printing, comparing).
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Property Decorators (Getters/Setters)
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    @property
+    def radius(self):
+        return self._radius
+
+    @radius.setter
+    def radius(self, value):
+        if value < 0:
+            raise ValueError("Negative radius not allowed")
+        self._radius = value
+
+c = Circle(5)
+c.radius = 10
+print(c.radius)
+# ✅ Use Case:
+# Data validation and encapsulation without changing the external API.
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Object Cloning (Using copy)
+import copy
+
+class Point:
+    def __init__(self, x):
+        self.x = x
+
+p1 = Point(10)
+p2 = copy.copy(p1)
+print(p2.x)
+# ✅ Use Case:
+# Useful in simulations or testing where you want to manipulate object state temporarily.
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Protected Attributes and Methods
+# 🧩 Syntax: _single_underscore
+class Database:
+    def __init__(self):
+        self._connection = "db://..."  # protected
+
+    def _connect(self):
+        print("Connecting to DB...")
+# This is a convention: “Don’t access me directly unless you’re subclassing.”
+
+# It's not enforced by Python (can still access from outside).
+
+# ✅ Use Case:
+# Used when:
+
+# The attribute is for internal logic of the class or frameworks.
+
+# But subclasses might still need access.
+
+class MySQLDatabase(Database):
+    def reconnect(self):
+        print("Reusing:", self._connection)
+# You’ll see this a lot in Django/Flask/ORM internals — e.g., _meta, _fields, _execute()
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+# Private Attributes and Methods
+# 🔐 Syntax: __double_underscore
+class User:
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password  # private
+
+    def __encrypt_password(self):  # private method
+        return self.__password[::-1]  # mock encryption
+
+    def check_password(self, input_pwd):
+        return input_pwd == self.__password
+# Python name-mangles it internally → self._User__password
+
+# Makes it harder to access/modify from outside.
+
+# ✅ Use Case:
+# Use when:
+
+# You want to hide sensitive data or critical internal logic.
+
+# Prevent subclass or user from accidentally changing the value.
+
+# You’re writing security-sensitive modules like auth, token validation, crypto.

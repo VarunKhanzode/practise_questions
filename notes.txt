@@ -1,0 +1,25 @@
+
+asyncio-
+Use Case: 
+    I/O-bound tasks where you spend time waiting for external resources (e.g., file I/O, network requests, database queries).
+
+How it works: 
+    asyncio uses asynchronous programming to handle multiple I/O-bound tasks concurrently within a single thread. 
+    Tasks release control during wait times, allowing other tasks to execute.
+
+
+multithreading-
+Use Case: 
+    I/O-bound tasks that need low-latency or interaction with libraries that don't support asyncio.
+
+How it works:
+    Multiple threads share the same memory space. 
+    The Global Interpreter Lock (GIL) in Python allows only one thread to execute Python bytecode at a time, 
+    so this isn't effective for CPU-bound tasks.
+
+multiprocessing-
+Use Case: 
+    CPU-bound tasks that require parallel execution across multiple CPU cores.
+
+How it works: 
+    Spawns separate processes, each with its own memory space. This bypasses the GIL, making it suitable for CPU-heavy tasks.
