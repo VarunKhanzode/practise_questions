@@ -50,6 +50,7 @@ process_payment(PayPalPayment(), 500)
 #  Encapsulation
 #  Concept:
 #  Hiding internal object details and exposing only what’s necessary.
+# Achieved using private variables and getters/setters.
 
 class BankAccount:
     def __init__(self, balance):
