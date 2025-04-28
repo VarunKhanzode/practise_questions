@@ -58,3 +58,10 @@ git commit -m "Your commit message here"
 
 # Push to the main branch
 git push origin main
+
+# GIL
+What is it? - A lock that allows only one thread to run Python code at a time
+Why exists? - To protect memory (reference counting) from thread issues
+When is it okay? - I/O-bound work (network, file, DB)
+When is it bad? - CPU-bound tasks (math, loops)
+Alternatives - multiprocessing, NumPy, C extensions
