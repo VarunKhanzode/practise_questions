@@ -1,3 +1,24 @@
+
+# Unordered (Python 3.7+ maintains insertion order, but conceptually not designed for order)
+
+# Mutable
+
+# Keys are unique
+
+# When to use:
+
+# When you want to map one thing to another (key-value relationships).
+
+# When you need fast lookup based on a key.
+
+# Real-time examples:
+
+# User profile (name, email, age).
+
+# Configuration settings for an app (like API keys, DB connection details).
+
+# Storing word counts in a paragraph.
+
 # dictionary_examples.py
 
 # Dictionary creation

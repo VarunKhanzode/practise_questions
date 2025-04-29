@@ -1,3 +1,24 @@
+# Ordered (elements have a defined index)
+
+# Mutable (can add, remove, change elements)
+
+# Allows duplicates
+
+# When to use:
+
+# When you have an ordered collection of items that might change.
+
+# When duplicates are allowed.
+
+# Real-time examples:
+
+# Shopping cart items: Users can add/remove items anytime.
+
+# Students attending an event (where duplicate names may happen and order matters).
+
+# Queueing tasks for processing later.
+
+
 # list_examples.py
 
 # List creation

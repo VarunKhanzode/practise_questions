@@ -1,3 +1,24 @@
+# Unordered
+
+# Mutable
+
+# No duplicates allowed
+
+# When to use:
+
+# When you need to maintain a collection of unique items.
+
+# Useful for membership testing, removing duplicates, and set operations (union, intersection).
+
+# Real-time examples:
+
+# List of registered users — avoid duplicate registrations.
+
+# Unique tags in a blog application.
+
+# Finding common elements between two groups.
+
+
 # set_examples.py
 
 # Set creation

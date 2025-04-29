@@ -1,3 +1,22 @@
+# Ordered
+
+# Immutable (cannot change elements once created)
+
+# Allows duplicates
+
+# When to use:
+
+# When you need a fixed, constant set of values.
+
+# When you want to use them as keys in dictionaries (because tuples are hashable).
+
+# Real-time examples:
+
+# Geographical coordinates (latitude, longitude) – they don’t change.
+
+# Database records that are fetched as read-only.
+
+
 # tuple_examples.py
 
 # Tuple creation
