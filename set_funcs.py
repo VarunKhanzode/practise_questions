@@ -71,15 +71,19 @@ print(my_set)  # Output: set()
 set1 = {1, 2}
 set2 = {2, 3}
 print(set1.union(set2))  # Output: {1, 2, 3}
+# set1 | set2
 
 # intersection() - common elements
 print(set1.intersection(set2))  # Output: {2}
+# set1 & set2 
 
 # difference() - elements in set1 but not in set2
 print(set1.difference(set2))  # Output: {1}
+# set1 - set2 
 
 # symmetric_difference() - elements in either set1 or set2 but not both
 print(set1.symmetric_difference(set2))  # Output: {1, 3}
+# set1 ^ set2 
 
 # issubset() - whether set1 is subset of set2
 print({1, 2}.issubset({1, 2, 3}))  # Output: True

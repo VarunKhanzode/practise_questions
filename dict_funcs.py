@@ -72,3 +72,8 @@ print(copy_dict)  # Output: {'x': 10, 'y': 20}
 # fromkeys() - creates dictionary from keys with same value
 new_dict = dict.fromkeys(['p', 'q', 'r'], 0)
 print(new_dict)  # Output: {'p': 0, 'q': 0, 'r': 0}
+
+data = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+sorted_desc = dict(sorted(data.items(), key=lambda item: item[1], reverse=True))
+print(sorted_desc)
+# Output: {'d': 4, 'c': 3, 'b': 2, 'a': 1}
