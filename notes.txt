@@ -65,3 +65,22 @@ Why exists? - To protect memory (reference counting) from thread issues
 When is it okay? - I/O-bound work (network, file, DB)
 When is it bad? - CPU-bound tasks (math, loops)
 Alternatives - multiprocessing, NumPy, C extensions
+
+
+Gil is a mechanism in python which ensures that only one thread can execute python bytecode at a time. It exists to simplify memory management particularly python's reference counting system.
+This means that multi threading does not provide true parallelism for CPU bound tasks. Only one thread runs at a time so multi threaded performance gains are limited for heavy computations.
+
+"What is Python’s reference counting system?"
+> Python uses reference counting as one of its memory management techniques.
+Every object in Python has an internal counter that keeps track of how many references (or variables) are currently pointing to that object.
+
+When a new reference is made, the count increases. When a reference is deleted or goes out of scope, the count decreases.
+
+When the reference count drops to zero, it means the object is no longer being used, and Python automatically frees the memory (i.e., garbage collects the object).
+
+Why is this important for the GIL?
+
+> Because reference counting isn’t thread-safe by default.
+If two threads try to update the reference count at the same time, it could lead to memory errors or crashes.
+
+That’s one of the main reasons Python’s GIL exists — it ensures only one thread can modify reference counts at a time.

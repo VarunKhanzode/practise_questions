@@ -1,6 +1,9 @@
 # Ordered
 
 # Immutable (cannot change elements once created)
+# You cannot change an element.
+# You cannot add a new element.
+# You cannot remove an element.
 
 # Allows duplicates
 
