@@ -77,3 +77,9 @@ data = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
 sorted_desc = dict(sorted(data.items(), key=lambda item: item[1], reverse=True))
 print(sorted_desc)
 # Output: {'d': 4, 'c': 3, 'b': 2, 'a': 1}
+
+def sort_dicts_by_key(lst, key):
+    return sorted(lst, key=lambda x: x[key])
+
+data = [{'name': 'Alice', 'age': 25}, {'name': 'Bob', 'age': 20}]
+print(sort_dicts_by_key(data, 'age'))

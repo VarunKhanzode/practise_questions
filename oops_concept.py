@@ -194,16 +194,24 @@ print(Dog.total_dogs())  # 2
 
 # Dunder (Magic) Methods
 # ➤ Concept:
-# Special methods with __ like __init__, __str__, __len__, etc.
-class Book:
-    def __init__(self, title):
-        self.title = title
+# Special methods with __ like __init__, __str__, __len__, etc. 
+# Dunder methods, or magic methods, are special methods in Python that start and end with double underscores (like __init__, __str__, __add__).
+# We use them to define how objects behave with built-in operations like printing, adding, or comparing. This is called operator overloading."
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
 
     def __str__(self):
-        return f"Book: {self.title}"
+        return f"({self.x}, {self.y})"
 
-b = Book("1984")
-print(str(b))
+p1 = Point(1, 2)
+p2 = Point(3, 4)
+print(p1 + p2)  # Output: (4, 6)
 # ✅ Use Case:
 # Customize object behavior (like adding, printing, comparing).
 
@@ -247,6 +255,11 @@ print(p2.x)
 
 
 # Protected Attributes and Methods
+# Protected attributes (with a single underscore _) can be accessed from outside the class and 
+# by subclasses — but by convention, they are meant to be internal.
+
+# Private attributes (with double underscore __) cannot be directly accessed outside the class or 
+# in a subclass — they are name-mangled to prevent accidental access.
 # 🧩 Syntax: _single_underscore
 class Database:
     def __init__(self):
@@ -275,18 +288,14 @@ class MySQLDatabase(Database):
 
 # Private Attributes and Methods
 # 🔐 Syntax: __double_underscore
-class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.__password = password  # private
+class Animal:
+    def __init__(self):
+        self.__type = "Wild"  # private
 
-    def __encrypt_password(self):  # private method
-        return self.__password[::-1]  # mock encryption
-
-    def check_password(self, input_pwd):
-        return input_pwd == self.__password
-# Python name-mangles it internally → self._User__password
-
+class Dog(Animal):
+    def print_type(self):
+        # print(self.__type)  ❌ This will raise AttributeError
+        print(self._Animal__type)  # ✅ Accessible via name mangling
 # Makes it harder to access/modify from outside.
 
 # ✅ Use Case:

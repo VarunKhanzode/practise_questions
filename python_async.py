@@ -31,7 +31,11 @@ async def main():
 asyncio.run(main())
 # Here, all requests are sent at the same time and we wait for all responses concurrently — fast and efficient.
 
+# “Pause this coroutine here, let other tasks run while we wait for some_async_function() to finish, and resume this coroutine when it's done.”
 
+# ✅ Yes, it waits — but asynchronously.
+# It doesn't block the entire program like regular (synchronous) time.sleep() would. 
+# It only suspends the current coroutine, giving control back to the event loop.
 
 
 # Test Scenario: Async vs Sync (Comparison)

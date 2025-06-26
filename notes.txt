@@ -84,3 +84,26 @@ Why is this important for the GIL?
 If two threads try to update the reference count at the same time, it could lead to memory errors or crashes.
 
 That’s one of the main reasons Python’s GIL exists — it ensures only one thread can modify reference counts at a time.
+
+Python uses automatic memory management. Every object in Python has a reference count — it tracks how many variables point to 
+that object. When the reference count drops to zero, the object is deleted.
+
+However, sometimes two objects reference each other — that’s called a circular reference. 
+In that case, Python uses a built-in garbage collector to detect and clean them up.
+
+So in short: Python first uses reference counting, and when that's not enough, it uses a garbage collector to handle leftovers."
+
+
+[Client] ---> [Nginx] ---> [Gunicorn/Uvicorn] ---> [Flask/FastAPI App]
+
+Gunicorn is a WSGI server used to run Flask/Django apps in production.
+Uvicorn is an ASGI server designed for FastAPI or any async framework.
+Nginx is a reverse proxy that routes traffic to these servers, handles SSL, and serves static files.
+
+SSL is a security protocol used to encrypt the data transmitted between a client (like a browser) and 
+a server (like a website) to ensure privacy, integrity, and security.
+
+FastAPI acts as a higher-level API framework built on Starlette. While Starlette provides the ASGI foundation — 
+like routing, middleware, and request/response handling — FastAPI adds automatic validation with Pydantic, automatic OpenAPI documentation, 
+a dependency injection system, and strong typing using Python type hints. This allows developers to build 
+production-ready APIs much faster and with fewer bugs.
