@@ -1,51 +1,4 @@
 
-asyncio-
-Use Case: 
-    I/O-bound tasks where you spend time waiting for external resources (e.g., file I/O, network requests, database queries).
-
-    "asyncio is used for writing asynchronous code in Python. It allows a single thread to handle many tasks by switching between 
-    them when one task is waiting—like waiting for network or disk operations. It’s ideal for I/O-bound operations where you don't 
-    need to use CPU heavily but have to wait a lot, like API calls or reading files."
-
-Example:
-
-    "If I'm making 10 API calls, instead of waiting for one to finish before starting the next, I can use asyncio to start all at once 
-    and process responses as they come, saving time."
-
-
-multithreading-
-Use Case: 
-    I/O-bound tasks that need low-latency or interaction with libraries that don't support asyncio.
-
-How it works:
-    Multiple threads share the same memory space. 
-    The Global Interpreter Lock (GIL) in Python allows only one thread to execute Python bytecode at a time, 
-    so this isn't effective for CPU-bound tasks.
-
-    "Multithreading uses multiple threads within a single process. It's good for I/O-bound tasks like reading files or making 
-    HTTP requests because while one thread waits, another can continue. But in Python, due to the Global Interpreter Lock (GIL), 
-    threads don’t run Python code in parallel, so it's not ideal for CPU-bound tasks."
-
-Example:
-
-    "If I have to download multiple images from the internet, I can use multithreading so while one thread waits for a response,
-     others continue downloading."
-
-multiprocessing-
-Use Case: 
-    CPU-bound tasks that require parallel execution across multiple CPU cores.
-
-How it works: 
-    Spawns separate processes, each with its own memory space. This bypasses the GIL, making it suitable for CPU-heavy tasks.
-
-    "Multiprocessing creates separate processes, each with its own Python interpreter and memory space. It's best for CPU-bound tasks
-     like data processing or calculations because it bypasses the GIL and runs truly in parallel."
-
-Example:
-
-    "If I have to perform a heavy computation like processing millions of records or doing image transformations, 
-    I’ll use multiprocessing to split the work across multiple CPU cores."
-
 
 # Check status of changes
 git status
@@ -107,3 +60,26 @@ FastAPI acts as a higher-level API framework built on Starlette. While Starlette
 like routing, middleware, and request/response handling — FastAPI adds automatic validation with Pydantic, automatic OpenAPI documentation, 
 a dependency injection system, and strong typing using Python type hints. This allows developers to build 
 production-ready APIs much faster and with fewer bugs.
+
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        stime = time.time()
+        result = func(*args, **kwargs)
+        etime = time.time()
+        print(f"{func.__name__} took {etime-stime:.4f} seconds")
+        return result
+    return wrapper
+
+@decorator
+def generate(n):
+    for i in range(n):
+        time.sleep(1)
+        print(i)
+
+generate(3)
+output -
+0
+1
+2
+generate took 3.0006 seconds
+

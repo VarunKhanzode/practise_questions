@@ -6,7 +6,9 @@
 # Abstract Class
 # An abstract class is a class that cannot be instantiated directly. 
 # It is meant to be inherited by other classes, and it defines a common interface or contract that all its subclasses must follow.
-# Let’s say you’re building an e-commerce platform. You want to support multiple payment methods: credit card, PayPal, etc.
+# An abstract class is a class that cannot be instantiated directly. It provides a template for other classes to follow. 
+# The methods in an abstract class are declared, but not implemented — their implementation is left to the child classes.
+# We use abstraction when we want to enforce a common structure across multiple classes without worrying about how each class implements it.
 
 # Instead of hardcoding the logic, you define an abstract class:
 from abc import ABC, abstractmethod
@@ -35,7 +37,6 @@ class PayPalPayment(PaymentGateway):
 
 # ✅ Why it's useful:
 # Enforces a common structure across all payment types.
-
 # Makes your code extensible — add CryptoPayment without modifying existing code.
 
 # Works well with polymorphism:
@@ -51,6 +52,9 @@ process_payment(PayPalPayment(), 500)
 #  Concept:
 #  Hiding internal object details and exposing only what’s necessary.
 # Achieved using private variables and getters/setters.
+# Encapsulation is the concept of hiding the internal details of an object and only exposing a controlled interface to the outside world.
+# In Python, we achieve this using private variables (by prefixing them with __) and by providing getter/setter methods to access or modify them.
+# It helps in protecting sensitive data and preventing unintended changes.
 
 class BankAccount:
     def __init__(self, balance):
@@ -65,6 +69,9 @@ class BankAccount:
 acc = BankAccount(1000)
 acc.deposit(500)
 print(acc.get_balance())  # 1500
+
+# __balance is private, cannot be accessed directly.
+# Access is provided through get_balance() — a controlled interface.
 
 # Use Case:
 # Securing sensitive data like passwords, balance, or tokens from unauthorized access.
@@ -100,6 +107,9 @@ car.honk()
 # Polymorphism
 #  Concept:
 # Allows different classes to be treated as instances of the same class through a common interface.
+# Polymorphism means "many forms". It allows different classes to be treated as if
+# they are the same type — using a common interface, even if they behave differently.
+# In Python, polymorphism lets us call the same method on different objects, and each object will respond in its own way.
 
 class Shape:
     def draw(self):
@@ -311,3 +321,36 @@ def fibonacci(n):
     if n <= 1:
         return n
     return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+class temp:
+    def example(self):
+        print('something')
+    
+    @staticmethod
+    def example1():
+        print('static')
+        
+    @classmethod
+    def example2(cls):
+        print('class mehtod')
+        
+temp().example()
+temp.example1()
+temp.example2()
+
+# temp() — This creates an instance (object) of the class
+# temp() creates an object (an instance of the class).
+# Then .example() is called on that instance.
+# Required because example is an instance method and needs access to self.
+
+# temp.example1() — This does not create an instance
+# example1 is a static method, and it does not need an instance or even the class (cls) itself.
+# You can call it directly using the class name without () after the class.
+# So no need to create an object — just call the method: temp.example1()
+
+# temp.example2() — This is a class method
+# example2 uses @classmethod, so it receives the class itself as the first parameter (cls).
+# You can call it directly using the class name.
+# Again, no need to use temp() unless you want to access it via an instance.
+
